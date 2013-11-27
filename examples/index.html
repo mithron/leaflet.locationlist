@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"> 
+
+    <head>
+		<meta charset='utf-8'/>
+        <title>leaflet.locationlist example</title>
+		<style>
+			html { height: 100% }
+			body { height: 100%; margin: 0; padding: 0;}
+			#map{ height: 100% }
+		</style>
+
+        <!-- Include Leaflet -->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+        <![endif]-->
+        <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+
+        <link rel="stylesheet" href="../src/leaflet.locationlist.css" />
+       
+    </head>
+    <body>
+		<script src="../src/leaflet.locationlist.js"></script>
+        <div id="map"></div>
+
+        <script>
+            
+			var m = L.map('map').setView([50.65,-13.95],3);			
+			
+			var llist = L.control.locationlist();
+			m.addControl(llist);
+			
+			var layer = L.tileLayer('http://{s}.tile.cloudmade.com/4eb124a4e29549219e41c06916cce651/{styleId}/256/{z}/{x}/{y}.png',
+				{attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade', styleId : '95859'}).addTo(m);
+
+            		
+        </script>
+    </body>
+</html>
