@@ -36,7 +36,7 @@ L.Control.LocationList = L.Control.extend({
 		if (this.options.showList) {
 		    var formContainer;
 			formContainer = this._formContainer = L.DomUtil.create('div', 'leaflet-control-layers leaflet-bar');
-			this._createList(className, formContainer, this);
+			this._createList(className, formContainer, this);			
 			container.appendChild(formContainer);
 			}
 		
@@ -51,14 +51,15 @@ L.Control.LocationList = L.Control.extend({
 		//Makes this work on IE10 Touch devices by stopping it from firing a mouseout event when the touch is released
 		container.setAttribute('aria-haspopup', true);
 		
-		L.DomEvent.on(container, 'click', L.DomEvent.stopPropagation);		
-
+		L.DomEvent
+		    .addListener(container, 'click', L.DomEvent.stopPropagation)
+			.addListener(container, 'click', L.DomEvent.preventDefault);
+			
 		var form = this._form = L.DomUtil.create('form', className + '-form'), i;
 				
 		for (i=0;i<this.options.locationsList.length;i++) {
 			form.appendChild(this._addLocation(this.options.locationsList[i],this._onListItemClick, this));
-			}
-		
+			}		
 		container.appendChild(form);
 			
 	},
@@ -102,6 +103,17 @@ L.Control.LocationList = L.Control.extend({
 	},
 	
 	_onListItemClick: function (e){
+		var i;
+		for (i=0; i<this.options.locationsList.length;i++) {
+			console.log(this._form);
+//			console.log(this._form.i);
+//			if (e.target != this._form.i){
+//				this._form.i.checked = false;
+//				}
+//			else {
+//				this._form.i.checked = true;
+//				}				
+//			}
 		console.log('Click!');		
 		console.log(e);
 		console.log('This!');
