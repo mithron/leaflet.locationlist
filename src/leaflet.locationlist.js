@@ -13,10 +13,8 @@ L.Control.LocationList = L.Control.extend({
 
 	onAdd: function (map) {
 	
-		console.log(this);
-		console.log(this.options.locationsList.length);
 		if (!this.options.locationsList || this.options.locationsList.length <3) {
-			console.log('Too short list!');
+			console.log('Too short list! Maybe wrong');			
 		}
 		
 		this._map = map;
@@ -25,7 +23,7 @@ L.Control.LocationList = L.Control.extend({
 		
 		container = this._contentContainer = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-bar');		
 		
-		this._currentLocation = this.options.locationsList[0];
+		this._currentLocation_index = 0;
 				
 		this._LeftButton = this._createButton(this.options.nextText, this.options.nextTitle, 
 													className + '-arrow-next', container, this._switchLeft, this);
@@ -63,23 +61,22 @@ L.Control.LocationList = L.Control.extend({
 		return link;
 	},
 	
-	_switchLeft: function (e) {		
-	    if (!this.options.locationsList) {
-		     console.log('No way');}
-		this._currentLocation = this.options.locationsList[1];
-		this._map.setView(this._currentLocation.latlng, this._currentLocation.zoom);
-		this.options.locationsList.push(this.options.locationsList[0]);
-		this.options.locationsList.shift();
-		console.log(this);
+	_switchLeft: function (e) {	
+		if (this._currentLocation_index != this.options.locationsList.length - 1 ) {
+			this._currentLocation_index = this._currentLocation_index + 1 ; }
+		else {
+			 this._currentLocation_index = 0 ;}
+			
+		this._map.setView(this.options.locationsList[this._currentLocation_index].latlng, this.options.locationsList[this._currentLocation_index].zoom);		
 	},
-	_switchRight: function (e) {		
-		if (!this.options.locationsList) {
-		     console.log('No way');}
-		this._currentLocation = this.options.locationsList[this.options.locationsList.length-1];
-		this._map.setView(this._currentLocation.latlng, this._currentLocation.zoom);
-		this.options.locationsList.unshift(this.options.locationsList[this.options.locationsList.length-1]);
-		this.options.locationsList.pop();
-		console.log(this);
+	_switchRight: function (e) {
+		if (this._currentLocation_index != 0) {
+			this._currentLocation_index = this._currentLocation_index - 1 ; }
+		else {
+			this._currentLocation_index = this.options.locationsList.length - 1 ;}
+			
+		this._map.setView(this.options.locationsList[this._currentLocation_index].latlng, this.options.locationsList[this._currentLocation_index].zoom);	
+	
 	}	
 		
 });
@@ -89,4 +86,3 @@ L.Control.LocationList = L.Control.extend({
 L.control.locationlist = function (options) {
 	return new L.Control.LocationList(options);
 };
-
