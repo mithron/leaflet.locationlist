@@ -1,4 +1,4 @@
-.leaflet-control-locationlist-arrow-next { background-image: url('../img/icon-next.png'); }
-.leaflet-control-locationlist-arrow-prev { background-image: url('../img/icon-prev.png'); }
+.leaflet-control-locationlist-arrow-next { background-image: url('../img/icon-next.png'); float: left;}
+.leaflet-control-locationlist-arrow-prev { background-image: url('../img/icon-prev.png'); float: left;}
 
 

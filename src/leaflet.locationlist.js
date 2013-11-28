@@ -27,10 +27,13 @@ L.Control.LocationList = L.Control.extend({
 		
 		this._currentLocation_index = 0;
 				
-		this._LeftButton = this._createButton(this.options.nextText, this.options.nextTitle, 
-													className + '-arrow-next', arrowContainer, this._switchLeft, this);
+		
 		this._RightButton = this._createButton(this.options.prevText, this.options.prevTitle,
-													className + '-arrow-prev', arrowContainer, this._switchRight, this);
+													className + '-arrow-prev', arrowContainer, this._switchPrev, this);
+													
+		this._LeftButton = this._createButton(this.options.nextText, this.options.nextTitle, 
+													className + '-arrow-next', arrowContainer, this._switchNext, this);
+													
 		container.appendChild(arrowContainer);
 		
 		if (this.options.showList) {
@@ -55,13 +58,19 @@ L.Control.LocationList = L.Control.extend({
 		    .addListener(container, 'click', L.DomEvent.stopPropagation)
 			.addListener(container, 'click', L.DomEvent.preventDefault);
 			
-		var form = this._form = L.DomUtil.create('form', className + '-form'), i;
+		var form = this._form = L.DomUtil.create('form', className + '-form');
 				
-		for (i=0;i<this.options.locationsList.length;i++) {
-			form.appendChild(this._addLocation(this.options.locationsList[i],this._onListItemClick, this));
-			}		
+		this._updateList();		
 		container.appendChild(form);
 			
+	},
+	
+	_updateList: function (){
+		var i;
+		for (i=0;i<this.options.locationsList.length;i++) {
+			this._form.appendChild(this._addLocation(this.options.locationsList[i],this._onListItemClick, this));
+			}
+		return this._form;
 	},
 	
 	_createButton: function (text, title, className, container, fn, context) {
@@ -105,7 +114,9 @@ L.Control.LocationList = L.Control.extend({
 	_onListItemClick: function (e){
 		var i;
 		for (i=0; i<this.options.locationsList.length;i++) {
+			console.log('This!');
 			console.log(this._form);
+		
 //			console.log(this._form.i);
 //			if (e.target != this._form.i){
 //				this._form.i.checked = false;
@@ -113,14 +124,14 @@ L.Control.LocationList = L.Control.extend({
 //			else {
 //				this._form.i.checked = true;
 //				}				
-//			}
+		}
 		console.log('Click!');		
 		console.log(e);
 		console.log('This!');
 		console.log(this);
 	},
 	
-	_switchLeft: function (e) {	
+	_switchNext: function (e) {	
 		if (this._currentLocation_index != this.options.locationsList.length - 1 ) {
 			this._currentLocation_index = this._currentLocation_index + 1 ; }
 		else {
@@ -128,7 +139,7 @@ L.Control.LocationList = L.Control.extend({
 			
 		this._map.setView(this.options.locationsList[this._currentLocation_index].latlng, this.options.locationsList[this._currentLocation_index].zoom);		
 	},
-	_switchRight: function (e) {
+	_switchPrev: function (e) {
 		if (this._currentLocation_index != 0) {
 			this._currentLocation_index = this._currentLocation_index - 1 ; }
 		else {
