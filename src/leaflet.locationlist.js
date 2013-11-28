@@ -21,14 +21,16 @@ L.Control.LocationList = L.Control.extend({
 		
 		var className = 'leaflet-control-location-list', container;
 		
-		container = this._contentContainer = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-bar');		
+		container = this._contentContainer = L.DomUtil.create('div', 'leaflet-bar');		
 		
 		this._currentLocation_index = 0;
 				
-		this._LeftButton = this._createButton(this.options.nextText, this.options.nextTitle, 
-													className + '-arrow-next', container, this._switchLeft, this);
-		this._RightButton = this._createButton(this.options.prevText, this.options.prevTitle,
-													className + '-arrow-prev', container, this._switchRight, this);
+		
+		this._prevButton = this._createButton(this.options.prevText, this.options.prevTitle,
+													className + '-arrow-prev', container, this._switchPrev, this);
+													
+		this._nextButton = this._createButton(this.options.nextText, this.options.nextTitle, 
+													className + '-arrow-next', container, this._switchNext, this);
 			
 		return container;
 		
@@ -61,7 +63,7 @@ L.Control.LocationList = L.Control.extend({
 		return link;
 	},
 	
-	_switchLeft: function (e) {	
+	_switchNext: function (e) {	
 		if (this._currentLocation_index != this.options.locationsList.length - 1 ) {
 			this._currentLocation_index = this._currentLocation_index + 1 ; }
 		else {
@@ -69,7 +71,7 @@ L.Control.LocationList = L.Control.extend({
 			
 		this._map.setView(this.options.locationsList[this._currentLocation_index].latlng, this.options.locationsList[this._currentLocation_index].zoom);		
 	},
-	_switchRight: function (e) {
+	_switchPrev: function (e) {
 		if (this._currentLocation_index != 0) {
 			this._currentLocation_index = this._currentLocation_index - 1 ; }
 		else {
