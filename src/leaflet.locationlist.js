@@ -1,7 +1,7 @@
 L.Control.LocationList = L.Control.extend({
 	options: {
 		position: 'topright',
-		showList: true,		
+		showList: false,		
 		locationsList : [ {title: 'Poland', latlng: [52.03, 19.27], zoom: 6},
 						  {title: 'Other', latlng: [50.04, 14.28], zoom: 6},
 						  {title: 'Other2', latlng: [50.04, 19.27], zoom: 12}],		
