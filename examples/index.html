@@ -17,7 +17,16 @@
         <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
 
         <link rel="stylesheet" href="../src/leaflet.locationlist.css" />
-       
+        <script>
+		MB_ATTR = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>';
+
+		MB_URL = 'http://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
+
+		OSM_URL = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+		OSM_ATTRIB = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+	</script>
     </head>
     <body>
 		<script src="../src/leaflet.locationlist.js"></script>
@@ -30,10 +39,10 @@
 			var llist = L.control.locationlist();
 			m.addControl(llist);
 			
-			var layer = L.tileLayer('http://{s}.tile.cloudmade.com/4eb124a4e29549219e41c06916cce651/{styleId}/256/{z}/{x}/{y}.png',
-				{attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade', styleId : '95859'}).addTo(m);
+			var layer = L.tileLayer(MB_URL, {attribution: MB_ATTR, id: 'examples.map-20v6611k'}).addTo(m);
 
             		
+	
         </script>
     </body>
 </html>
