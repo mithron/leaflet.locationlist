@@ -26,3 +26,6 @@ Helpers for arrows - what will be displayed on arrows as popup and if no image s
 ## Images
 
 Images for arrows are in img folder. They are specified in css, so you can change them into what you want.
+
+## Events
+Events are added to interact with control from code. Events are fired on switching to next (the 'next' event) or to previous (the 'prev' event) location. Example shows how to do it. 
