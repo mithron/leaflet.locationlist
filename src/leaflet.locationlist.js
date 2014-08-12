@@ -1,4 +1,7 @@
 L.Control.LocationList = L.Control.extend({
+	
+	includes: L.Mixin.Events,
+	
 	options: {
 		position: 'topright',
 		showlist: true,		
@@ -69,7 +72,8 @@ L.Control.LocationList = L.Control.extend({
 		else {
 			 this._currentLocation_index = 0 ;}
 			
-		this._map.setView(this.options.locationsList[this._currentLocation_index].latlng, this.options.locationsList[this._currentLocation_index].zoom);		
+		this._map.setView(this.options.locationsList[this._currentLocation_index].latlng, this.options.locationsList[this._currentLocation_index].zoom);
+		this.fire('next');
 	},
 	_switchPrev: function (e) {
 		if (this._currentLocation_index != 0) {
@@ -77,7 +81,8 @@ L.Control.LocationList = L.Control.extend({
 		else {
 			this._currentLocation_index = this.options.locationsList.length - 1 ;}
 			
-		this._map.setView(this.options.locationsList[this._currentLocation_index].latlng, this.options.locationsList[this._currentLocation_index].zoom);	
+		this._map.setView(this.options.locationsList[this._currentLocation_index].latlng, this.options.locationsList[this._currentLocation_index].zoom);
+		this.fire('prev');
 	
 	}	
 		
