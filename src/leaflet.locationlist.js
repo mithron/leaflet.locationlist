@@ -1,7 +1,7 @@
 L.Control.LocationList = L.Control.extend({
 	options: {
 		position: 'topright',
-		showList: false,		
+		showList: true,		
 		locationsList : [ {title: 'Poland', latlng: [52.03, 19.27], zoom: 6},
 						  {title: 'Other', latlng: [50.04, 14.28], zoom: 6},
 						  {title: 'Other2', latlng: [50.04, 19.27], zoom: 12}],		
@@ -39,14 +39,30 @@ L.Control.LocationList = L.Control.extend({
 		if (this.options.showList) {
 		    var formContainer;
 			formContainer = this._formContainer = L.DomUtil.create('div', 'leaflet-control-layers leaflet-bar');
-			this._createList(className, formContainer, this);			
-			container.appendChild(formContainer);
-			}
+			selector = $("<select id='location-box' style='width:100%'></select>");
+			selector.append("<option value>Select location...</option>");			
+			for (var i=0; i< this.options.locationsList.length; i++) {				
+				selector.append("<option value='" + i + "'>"+this.options.locationsList[i].title+"</option>");}
+			$("#location-box").select2().on("change", this._onTableClick);			
+			console.log(selector);
+			formContainer.appendChild(selector);
 		
+		}
 		
 		return container;
 		
     },
+	
+	_onTableClick: function (e) {
+	// table index stored in e.val
+	$("#location-box").select2("val", state_ix);
+
+	// change to the location
+	this._currentLocation_index = e.val;
+	
+	this._map.setView(this.options.locationsList[this._currentLocation_index].latlng, this.options.locationsList[this._currentLocation_index].zoom);
+  
+	},
 	
 	
 	_createList: function (className, container, context) {			
@@ -58,7 +74,7 @@ L.Control.LocationList = L.Control.extend({
 		    .addListener(container, 'click', L.DomEvent.stopPropagation)
 			.addListener(container, 'click', L.DomEvent.preventDefault);
 			
-		var form = this._form = L.DomUtil.create('form', className + '-form');
+		var select = this._select = L.DomUtil.create('select', className + '-form');
 				
 		this._updateList();		
 		container.appendChild(form);
