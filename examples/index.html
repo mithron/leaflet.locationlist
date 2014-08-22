@@ -36,7 +36,7 @@
             
 			var m = L.map('map').setView([50.65,-13.95],3);			
 			
-			var llist = L.control.locationlist();
+			var llist = L.control.locationlist({ showList: true, nextTitle: "Go Forward!"});
 			m.addControl(llist);
 			
 			var layer = L.tileLayer(MB_URL, {attribution: MB_ATTR, id: 'examples.map-20v6611k'}).addTo(m);
