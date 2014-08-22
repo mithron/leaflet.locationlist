@@ -52,7 +52,7 @@ L.Control.LocationList = L.Control.extend({
 		
     },
 	
-	_onListChange: function () {
+	_onListChange: function (e) {
 
 		this._currentLocation_index = this._fullist.selectedIndex;
 	
@@ -69,7 +69,7 @@ L.Control.LocationList = L.Control.extend({
 		return option;
   },
   
-  _update: function () {		
+  _update: function (e) {		
 		// L.DomUtil.empty(this._fullist); add in 0.7.4
 		while (this._fullist.firstChild) {
 				this._fullist.removeChild(this._fullist.firstChild);
