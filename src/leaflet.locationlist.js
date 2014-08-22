@@ -24,19 +24,20 @@ L.Control.LocationList = L.Control.extend({
 		
 		var className = 'leaflet-control-locationlist', container;
 		
-		container = this._contentContainer = L.DomUtil.create('div', 'leaflet-bar');		
+		container = this._contentContainer = L.DomUtil.create('div', className);		
 		
 		this._currentLocation_index = 0;
 				
+		arrowsContainer = L.DomUtil.create('div', className + '-arrows leaflet-bar', container);		
 		
 		this._prevButton = this._createButton(this.options.prevText, this.options.prevTitle,
-													className + '-arrow-prev', container, this._switchPrev, this);
+													className + '-arrow-prev', arrowsContainer, this._switchPrev, this);
 													
 		this._nextButton = this._createButton(this.options.nextText, this.options.nextTitle, 
-													className + '-arrow-next', container, this._switchNext, this);
+													className + '-arrow-next', arrowsContainer, this._switchNext, this);
 		
 		if (this.options.showList) {
-			var form = this._form = L.DomUtil.create('form', className + '-fullist');
+			var form = this._form = L.DomUtil.create('form', className + '-form leaflet-bar');
 			this._fullist = L.DomUtil.create('select', className + '-list', form);
 			this._fullist.style.width = '100%';
 	
@@ -78,8 +79,7 @@ L.Control.LocationList = L.Control.extend({
 			obj = this.options.locationsList[i];
 			this._fullist.appendChild(this._createListElement(obj,i));
 		};
-
-		console.log(this);
+		
 		return this;
   },
   
