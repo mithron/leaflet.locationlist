@@ -1,11 +1,11 @@
-.leaflet-bar .leaflet-control-location-list-arrow-next { 
+.leaflet-bar .leaflet-control-locationlist-arrow-next { 
 		background-image: url('../img/icon-next.png');
 		float: left;
 		border-top-left-radius: 0px !important;
 		border-bottom-left-radius: 0px !important;
 		border-top-right-radius: 4px !important;
 		border-bottom-right-radius: 4px !important;	}
-.leaflet-bar .leaflet-control-location-list-arrow-prev { 
+.leaflet-bar .leaflet-control-locationlist-arrow-prev { 
 		background-image: url('../img/icon-prev.png');
 		float: left;
 		border-top-left-radius: 4px !important;
