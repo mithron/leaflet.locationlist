@@ -43,6 +43,11 @@ L.Control.LocationList = L.Control.extend({
 	
 			L.DomEvent.on(this._fullist, 'change', this._onListChange, this);
 			
+			L.DomEvent
+		    .addListener(this._fullist, 'click', L.DomEvent.stopPropagation)
+			.addListener(this._fullist, 'click', L.DomEvent.preventDefault);
+		   // .addListener(this._fullist, 'click', this._onListChange, this);
+			
 			container.appendChild(form);
 			
 			this._update();
@@ -61,11 +66,17 @@ L.Control.LocationList = L.Control.extend({
   },
 		
   _createListElement: function (obj,ind) {
-		var option = document.createElement('option');		
+		var option = L.DomUtil.create('option');		
 		option.innerHTML = obj.title;
 		if (this._currentLocation_index == ind ) {
 			option.setAttribute('selected', true);
 		}
+		
+		L.DomEvent
+		    .addListener(option, 'click', L.DomEvent.stopPropagation)
+			.addListener(option, 'click', L.DomEvent.preventDefault)
+		    .addListener(option, 'click', this._onListChange, this);
+		
 		return option;
   },
   
