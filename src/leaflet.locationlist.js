@@ -26,6 +26,14 @@ L.Control.LocationList = L.Control.extend({
 		
 		container = this._contentContainer = L.DomUtil.create('div', className);		
 		
+		if (!L.Browser.touch) {
+			L.DomEvent
+				.disableClickPropagation(container)
+				.disableScrollPropagation(container);
+		} else {
+			L.DomEvent.on(container, 'click', L.DomEvent.stopPropagation);
+		}
+		
 		this._currentLocation_index = 0;
 				
 		arrowsContainer = L.DomUtil.create('div', className + '-arrows leaflet-bar', container);		
@@ -41,9 +49,8 @@ L.Control.LocationList = L.Control.extend({
 			this._fullist = L.DomUtil.create('select', className + '-list', form);
 			this._fullist.style.width = '100%';			
 			
-			L.DomEvent
-		    .addListener(this._fullist, 'click', L.DomEvent.stopPropagation)
-			.addListener(this._fullist, 'click', L.DomEvent.preventDefault);		   
+			L.DomEvent		    
+			.addListener(this._fullist, 'click', this._onListChange, this);			
 			
 			container.appendChild(form);
 			
@@ -70,8 +77,8 @@ L.Control.LocationList = L.Control.extend({
 		}
 		
 		L.DomEvent
-		    .addListener(option, 'click', L.DomEvent.stopPropagation)
-			.addListener(option, 'click', L.DomEvent.preventDefault)
+		// .addListener(option, 'click', L.DomEvent.stopPropagation)
+		//	.addListener(option, 'click', L.DomEvent.preventDefault);
 		    .addListener(option, 'click', this._onListChange, this);
 		
 		return option;
