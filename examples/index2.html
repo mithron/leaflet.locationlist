@@ -1,0 +1,50 @@
+﻿<!doctype html><html lang="en"> 
+
+    <head>
+		<meta charset='utf-8'/>
+        <title>leaflet.locationlist example</title>
+		<style>
+			html { height: 100% }
+			body { height: 100%; margin: 0; padding: 0;}
+			#map{ height: 100% }
+		</style>
+
+        <!-- Include Leaflet -->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.ie.css" />
+        <![endif]-->
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+        <link rel="stylesheet" href="../src/leaflet.locationlist.css" />
+        <script>
+		MB_ATTR = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>';
+
+		MB_URL = 'http://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
+
+		OSM_URL = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+		OSM_ATTRIB = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+	</script>
+    </head>
+    <body>
+		<script src="../src/leaflet.locationlist.js"></script>
+        <div id="map"></div>
+
+        <script>
+            
+			var m = L.map('map').setView([50.65,-13.95],3);			
+			
+			var llist = new L.control.locationlist({locationsList: [ { title: "Общий вид", latlng: [51.505,-0.09], zoom:2 }, {title: 'labuan' , latlng: [ 5.3080,115.2208 ], zoom: 12 },   {title: 'cyprus' , latlng: [ 34.87,33.1 ], zoom: 9 },  {title: 'england' , latlng: [ 53.91728, -2.0874 ], zoom: 6 },   {title: 'Netherlands' , latlng: [ 53.111029,4.89258 ], zoom: 7 },  {title: 'Финляндия' , latlng: [ 64.91466,26.067255 ], zoom: 5 },    {title: 'Франция' , latlng: [ 46.71109,1.719103 ], zoom: 6 },       {title: 'Индия' , latlng: [ 21.12899,82.77922 ], zoom: 5 },       {title: 'Карибы' , latlng: [ 16.9815,-72.8474 ], zoom: 5 },    {title: 'Bahamas' , latlng: [ 24.19238,-76.72685 ], zoom: 7 },       {title: 'Аргентина' , latlng: [ -38.9680,-64.34599 ], zoom: 5 },     {title: 'Аруба' , latlng: [ 12.517572,-69.9649 ], zoom: 11 },     {title: 'Австралия' , latlng: [ -26.43907,133.2813 ], zoom: 4 },       {title: 'Канада' , latlng: [ 56,-96,4 ], zoom: 3 },     {title: 'Китай' , latlng: [ 35.85747,104.13611 ], zoom: 4 },   {title: 'Дания' , latlng: [ 56.15546,10.430995 ], zoom: 7 },   {title: 'Faroe Islands' , latlng: [ 61.8925,-6.9729704 ], zoom: 9 },  {title: 'Германия' , latlng: [ 51.343,11.61867 ], zoom: 6 },    {title: 'Гренландия' , latlng: [ 69.32735,-37.16392 ], zoom: 3 },   {title: 'Исландия' , latlng: [ 64.93127,-19.02116 ], zoom: 7 },  {title: 'Гернси' , latlng: [ 49.502917,-2.52685 ], zoom: 10 },     {title: 'Япония' , latlng: [ 37.49,136.4664 ], zoom: 6 },  {title: 'Южная Корея' , latlng: [ 36.48232,127.78854 ], zoom: 7 },  {title: 'Мальта' , latlng: [ 35.944,14.37952 ], zoom: 11 },    {title: 'Мексика' , latlng: [ 23.62665,-102.5375 ], zoom: 5 },   {title: 'Монако' , latlng: [ 43.73832,7.424458 ], zoom: 13 },   {title: 'Норвегия' , latlng: [ 64.5783,17.88823 ], zoom: 5 },  {title: 'Сан Марино' , latlng: [ 43.9428779,12.46 ], zoom: 12 },   {title: 'ЮАР' , latlng: [ -28.47926,24.6727 ], zoom: 5 },   {title: 'Испания' , latlng: [ 40.2085,-3.713 ], zoom: 6 },  {title: 'Швеция' , latlng: [ 62.1983,17.56719 ], zoom: 5 }, {title: 'США' , latlng: [ 37.6,-95.665 ], zoom: 4 },  {title: 'russia' , latlng: [ 63.47,92.1 ], zoom: 3 }], showList:true});
+			 
+			m.addControl(llist);
+			
+			var layer = L.tileLayer(MB_URL, {attribution: MB_ATTR, id: 'examples.map-20v6611k'}).addTo(m);
+
+            llist.on('next', function() { console.log("Switched to next!");});
+			llist.on('prev', function() { console.log("Switched to prev!");});
+			
+        </script>
+    </body>
+</html>

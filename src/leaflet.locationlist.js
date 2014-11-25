@@ -39,14 +39,11 @@ L.Control.LocationList = L.Control.extend({
 		if (this.options.showList) {
 			var form = this._form = L.DomUtil.create('form', className + '-form leaflet-bar');
 			this._fullist = L.DomUtil.create('select', className + '-list', form);
-			this._fullist.style.width = '100%';
-	
-			L.DomEvent.on(this._fullist, 'change', this._onListChange, this);
+			this._fullist.style.width = '100%';			
 			
 			L.DomEvent
 		    .addListener(this._fullist, 'click', L.DomEvent.stopPropagation)
-			.addListener(this._fullist, 'click', L.DomEvent.preventDefault);
-		   // .addListener(this._fullist, 'click', this._onListChange, this);
+			.addListener(this._fullist, 'click', L.DomEvent.preventDefault);		   
 			
 			container.appendChild(form);
 			
